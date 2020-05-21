@@ -1,0 +1,12 @@
+{
+  "name": "blood-donation-event",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index"
+  },
+  "author": "Darshan Datta",
+  "license": "MIT"
+}
