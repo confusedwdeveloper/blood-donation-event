@@ -15,7 +15,7 @@ router.post(
   [
     check("firstName", "Please enter your first name").trim().notEmpty(),
     check("lastName", "Please enter your last name").trim().notEmpty(),
-    check("email", "Please include a valid email").normalizeEmail().isEmail(),
+    check("email", "Please include a valid email").isEmail(),
     check(
       "password",
       "Please include a password with 7 or more characters"
