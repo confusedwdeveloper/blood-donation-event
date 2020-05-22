@@ -47,7 +47,7 @@ const Navbar = ({ auth }) => {
       <sc.MenuIcon title="Menu" size={28} onClick={handleClick} />
       <h1>
         <Link to="/">
-          <sc.DonattionIcon size={25} /> Blood Donation Program
+          <sc.DonattionIcon size={25} /> Blood Donation Event
         </Link>
       </h1>
       <sc.LinkContainer menuClicked={menuClicked}>

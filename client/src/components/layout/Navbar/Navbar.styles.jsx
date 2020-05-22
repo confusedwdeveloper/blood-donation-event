@@ -49,7 +49,7 @@ export const MenuIcon = styled(Menu)`
     display: inline-block;
     cursor: pointer;
     position: relative;
-    z-index: 1;
+    z-index: 3;
   }
 `;
 
@@ -64,12 +64,14 @@ export const LinkContainer = styled.ul`
 
   li a {
     transition: hover 0.3s ease-in;
+    font-size: 1.2rem;
     &:hover {
       color: #fffffe;
     }
   }
 
   @media (max-width: 800px) {
+    z-index: 1;
     position: fixed;
     background: #232946;
     height: 100vh;
