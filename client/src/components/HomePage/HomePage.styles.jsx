@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bgImage from "../../../assets/blood-donation.webp";
+import bgImage from "../../assets/blood-donation.webp";
 
 // container for overall page
 export const HomeContainer = styled.section`
