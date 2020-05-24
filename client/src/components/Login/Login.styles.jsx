@@ -27,6 +27,11 @@ export const LoginContainer = styled(Container)`
   p {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    @media (max-width: 550px) {
+      font-size: 1rem;
+      text-align: justify;
+      line-height: 1.4;
+    }
   }
 `;
 
