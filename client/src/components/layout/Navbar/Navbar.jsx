@@ -8,35 +8,58 @@ const Navbar = ({ auth }) => {
   const handleClick = (e) => {
     toggleMenuClicked((val) => !val);
   };
+
+  // close nav after clicking a link
+  const handleLink = (e) => {
+    if (menuClicked) {
+      toggleMenuClicked(false);
+    }
+  };
   const guestLinks = (
     <>
       <li>
-        <Link to="/about">About</Link>
+        <Link onClick={handleLink} to="/about">
+          About
+        </Link>
       </li>
       <li>
-        <Link to="/register">Register</Link>
+        <Link onClick={handleLink} to="/register">
+          Register
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link onClick={handleLink} to="/login">
+          Login
+        </Link>
       </li>
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link onClick={handleLink} to="/contact">
+          Contact
+        </Link>
       </li>
     </>
   );
   const authLinks = (
     <>
       <li>
-        <Link to="/about">About</Link>
+        <Link onClick={handleLink} to="/about">
+          About
+        </Link>
       </li>
       <li>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link onClick={handleLink} to="/dashboard">
+          Dashboard
+        </Link>
       </li>
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link onClick={handleLink} to="/contact">
+          Contact
+        </Link>
       </li>
       <li>
-        <a href="#!">Logout</a>
+        <a onClick={handleLink} href="#!">
+          Logout
+        </a>
       </li>
       {/* todo initial */}
     </>

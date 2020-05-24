@@ -29,8 +29,8 @@ const Login = (props) => {
       <sc.LoginContainer>
         <sc.LoginHeader>Log In</sc.LoginHeader>
         <p>
-          <sc.UserIcon size={20} /> Log Into Your Account To Volunteer or Find
-          donor
+          <sc.UserIcon size={20} /> Log into your account to volunteer or to
+          find a donor
         </p>
         <form onSubmit={handleSubmit}>
           <sc.FormInputContainer>
@@ -41,6 +41,7 @@ const Login = (props) => {
               onChange={handleChange}
               required
               placeholder="Email"
+              autoComplete="email"
             />
             <sc.InputLabel>Email</sc.InputLabel>
           </sc.FormInputContainer>
@@ -52,6 +53,7 @@ const Login = (props) => {
               required
               type="password"
               placeholder="Password"
+              autoComplete="current-password"
             />
             <sc.InputLabel>Password</sc.InputLabel>
           </sc.FormInputContainer>

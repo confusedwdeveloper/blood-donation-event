@@ -14,7 +14,7 @@ const HomePage = (props) => {
             <sc.RegisterButton as={Link} to="/register">
               Register
             </sc.RegisterButton>
-            <sc.RegisterButton as={Link} to="/signin">
+            <sc.RegisterButton as={Link} to="/login">
               Sign In
             </sc.RegisterButton>
           </div>
