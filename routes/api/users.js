@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../../models/User");
 const config = require("config");
+const verifyToken = require("../../middlewares/verifyToken");
 
 const router = express.Router();
 
@@ -61,5 +62,18 @@ router.post(
     }
   }
 );
+
+// @route   GET /api/users/
+// @desc    Get logged in users profile
+// @access  Private
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    return res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "Server error" });
+  }
+});
 
 module.exports = router;

@@ -1,9 +1,9 @@
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 const config = require("config");
 
 module.exports = function verifyToken(req, res, next) {
   // get token
-  const token = req.token("x-auth-token");
+  const token = req.get("x-auth-token");
   if (!token) {
     return res.status(400).json({ msg: "No token, access denied" });
   }
