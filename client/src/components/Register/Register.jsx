@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as Lsc from "../Login/Login.styles";
 import * as sc from "./Register.styles";
+import { connect } from "react-redux";
+import { registerUser } from "../../redux/actions/auth";
+import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
-const Register = (props) => {
+const Register = ({ registerUser, isLoggedIn }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,11 +29,18 @@ const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.error("Passwords don't match");
+      const options = {
+        position: "top-center",
+      };
+      toast.error("Passwords do not  match", options);
     } else {
-      console.log(formData);
+      registerUser({ firstName, lastName, email, password });
     }
   };
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Lsc.BackgroundDiv>
@@ -47,7 +58,6 @@ const Register = (props) => {
                 name="firstName"
                 value={firstName}
                 onChange={handleChange}
-                required
                 placeholder="First Name"
               />
               <Lsc.InputLabel>First Name</Lsc.InputLabel>
@@ -58,7 +68,6 @@ const Register = (props) => {
                 name="lastName"
                 value={lastName}
                 onChange={handleChange}
-                required
                 placeholder="Last Name"
               />
               <Lsc.InputLabel>Last Name</Lsc.InputLabel>
@@ -69,7 +78,6 @@ const Register = (props) => {
                 name="email"
                 value={email}
                 onChange={handleChange}
-                required
                 placeholder="Email"
                 autoComplete="email"
               />
@@ -81,7 +89,6 @@ const Register = (props) => {
                 autoComplete="new-password"
                 value={password}
                 onChange={handleChange}
-                required
                 type="password"
                 placeholder="Password"
               />
@@ -93,7 +100,6 @@ const Register = (props) => {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={handleChange}
-                required
                 type="password"
                 placeholder="Confirm Password"
               />
@@ -111,6 +117,13 @@ const Register = (props) => {
   );
 };
 
-Register.propTypes = {};
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+};
 
-export default Register;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+
+export default connect(mapStateToProps, { registerUser })(Register);

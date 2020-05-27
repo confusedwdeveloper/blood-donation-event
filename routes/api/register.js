@@ -7,7 +7,7 @@ const config = require("config");
 
 const router = express.Router();
 
-// @route   GET /api/register
+// @route   POST /api/register
 // @desc    Register new user
 // @access  Public
 router.post(
@@ -35,7 +35,9 @@ router.post(
       const userExists = await User.findOne({ email });
 
       if (userExists) {
-        return res.status(400).json({ msg: "User already exists" });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "User already exists" }] });
       }
 
       // Now that we know user doesn't exist, we can proceed forward
@@ -74,7 +76,7 @@ router.post(
       });
     } catch (err) {
       console.error(err.message);
-      res.status(500).json({ msg: "Server error" });
+      res.status(500).json({ errors: [{ msg: "Server error" }] });
     }
   }
 );

@@ -6,11 +6,15 @@ import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Contact from "./components/Contact/Contact";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   return (
     <Fragment>
       <GlobalStyle />
+      <ToastContainer />
       <Navbar />
       <Switch>
         <Route exact path="/">
