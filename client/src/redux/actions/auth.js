@@ -71,6 +71,38 @@ export const registerUser = (data) => async (dispatch) => {
   }
 };
 
+// action to login user
+export const loginUser = (data) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.post("/api/users/login", data, config);
+
+    // if no errors dispatch token and load user
+    dispatch({
+      type: LOGIN_SUCCCESS,
+      payload: res.data,
+    });
+
+    toast.success("Logged in successful!");
+
+    dispatch(loadUser());
+  } catch (err) {
+    const { errors } = err.response.data;
+    if (errors) {
+      const options = {
+        position: "top-center",
+      };
+      errors.forEach((error) => toast.error(error.msg, options));
+    }
+
+    dispatch({ type: LOGIN_FAIL });
+  }
+};
+
 // action to logout
 export const logoutUser = () => (dispatch) => {
   toast.dark("Successfully logged out");

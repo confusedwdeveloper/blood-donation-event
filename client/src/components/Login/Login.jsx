@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as sc from "./Login.styles";
+import { connect } from "react-redux";
+import { loginUser } from "../../redux/actions/auth";
+import { Redirect } from "react-router-dom";
 
-const Login = (props) => {
+const Login = ({ isLoggedIn, loginUser }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { email, password } = formData;
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -19,10 +24,12 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    loginUser({ email, password });
   };
 
-  const { email, password } = formData;
+  if (isLoggedIn) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <sc.BackgroundDiv>
@@ -68,6 +75,13 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {};
+Login.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  loginUser: PropTypes.func.isRequired,
+};
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);
