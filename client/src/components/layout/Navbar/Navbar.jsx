@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as sc from "./Navbar.styles";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutUser } from "../../../redux/actions/auth";
 
-const Navbar = ({ auth }) => {
+const Navbar = ({ auth: { loading, isLoggedIn }, logoutUser }) => {
   const [menuClicked, toggleMenuClicked] = useState(false);
   const handleClick = (e) => {
     toggleMenuClicked((val) => !val);
   };
 
   // close nav after clicking a link
-  const handleLink = (e) => {
+  const handleLink = () => {
     if (menuClicked) {
       toggleMenuClicked(false);
     }
   };
+
+  const handleLogout = () => {
+    logoutUser();
+    handleLink();
+  };
+
   const guestLinks = (
     <>
       <li>
@@ -28,13 +36,13 @@ const Navbar = ({ auth }) => {
         </Link>
       </li>
       <li>
-        <Link onClick={handleLink} to="/login">
-          Login
+        <Link onClick={handleLink} to="/contact">
+          Contact
         </Link>
       </li>
       <li>
-        <Link onClick={handleLink} to="/contact">
-          Contact
+        <Link onClick={handleLink} to="/login">
+          Login
         </Link>
       </li>
     </>
@@ -57,7 +65,7 @@ const Navbar = ({ auth }) => {
         </Link>
       </li>
       <li>
-        <a onClick={handleLink} href="#!">
+        <a onClick={handleLogout} href="#!">
           Logout
         </a>
       </li>
@@ -74,12 +82,19 @@ const Navbar = ({ auth }) => {
         </Link>
       </h1>
       <sc.LinkContainer menuClicked={menuClicked}>
-        {auth ? authLinks : guestLinks}
+        {!loading && isLoggedIn ? authLinks : guestLinks}
       </sc.LinkContainer>
     </sc.NavContainer>
   );
 };
 
-Navbar.propTypes = {};
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+};
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Navbar);

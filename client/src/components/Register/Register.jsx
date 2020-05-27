@@ -39,7 +39,7 @@ const Register = ({ registerUser, isLoggedIn }) => {
   };
 
   if (isLoggedIn) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

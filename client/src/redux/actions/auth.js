@@ -3,6 +3,9 @@ import {
   REGISTER_FAIL,
   LOAD_USER,
   AUTH_ERROR,
+  LOGIN_SUCCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
 } from "./types";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -66,4 +69,10 @@ export const registerUser = (data) => async (dispatch) => {
 
     dispatch({ type: REGISTER_FAIL });
   }
+};
+
+// action to logout
+export const logoutUser = () => (dispatch) => {
+  toast.dark("Successfully logged out");
+  dispatch({ type: LOGOUT });
 };
