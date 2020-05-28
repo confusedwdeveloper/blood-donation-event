@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as Lsc from "../Login/Login.styles";
 import * as Rsc from "../Register/Register.styles";
 import * as sc from "./Contact.styles";
+import { connect } from "react-redux";
 
 const Contact = (props) => {
   const [formData, setFormData] = useState({
@@ -89,4 +90,4 @@ const Contact = (props) => {
 
 Contact.propTypes = {};
 
-export default Contact;
+export default connect()(Contact);

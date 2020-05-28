@@ -4,8 +4,13 @@ import * as sc from "./Navbar.styles";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../redux/actions/auth";
+import { createStructuredSelector } from "reselect";
+import {
+  selectLoginStatus,
+  selectAuthLoading,
+} from "../../../redux/selectors/authSelectors";
 
-const Navbar = ({ auth: { loading, isLoggedIn }, logoutUser }) => {
+const Navbar = ({ loading, isLoggedIn, logoutUser }) => {
   const [menuClicked, toggleMenuClicked] = useState(false);
   const handleClick = (e) => {
     toggleMenuClicked((val) => !val);
@@ -89,12 +94,14 @@ const Navbar = ({ auth: { loading, isLoggedIn }, logoutUser }) => {
 };
 
 Navbar.propTypes = {
-  auth: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: selectLoginStatus,
+  loading: selectAuthLoading,
 });
 
 export default connect(mapStateToProps, { logoutUser })(Navbar);

@@ -4,6 +4,8 @@ import * as sc from "./Login.styles";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/actions/auth";
 import { Redirect } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { selectLoginStatus } from "../../redux/selectors/authSelectors";
 
 const Login = ({ isLoggedIn, loginUser }) => {
   const [formData, setFormData] = useState({
@@ -80,8 +82,8 @@ Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn,
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: selectLoginStatus,
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

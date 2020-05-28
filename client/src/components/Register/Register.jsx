@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { registerUser } from "../../redux/actions/auth";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { selectLoginStatus } from "../../redux/selectors/authSelectors";
 
 const Register = ({ registerUser, isLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -122,8 +124,8 @@ Register.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn,
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: selectLoginStatus,
 });
 
 export default connect(mapStateToProps, { registerUser })(Register);
