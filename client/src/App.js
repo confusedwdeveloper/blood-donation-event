@@ -33,9 +33,7 @@ function App({ loadUser }) {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
+        <Route path="/contact" component={Contact} />
       </Switch>
     </Fragment>
   );
