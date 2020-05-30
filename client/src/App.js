@@ -3,6 +3,7 @@ import GlobalStyle from "./globalStyles.styles";
 import Navbar from "./components/layout/Navbar/Navbar";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
+import About from "./components/About/About";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Contact from "./components/Contact/Contact";
@@ -26,6 +27,9 @@ function App({ loadUser }) {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
         <Route path="/register">
           <Register />
