@@ -11,9 +11,11 @@ import { ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import { loadUser } from "./redux/actions/auth";
 import PropTypes from "prop-types";
+import NotFound from "./components/NotFound/NotFound";
+import PrivateRoute from "./components/Routing/PrivateRoute";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 import "react-toastify/dist/ReactToastify.min.css";
-import NotFound from "./components/NotFound/NotFound";
 
 function App({ loadUser }) {
   useEffect(() => {
@@ -39,6 +41,7 @@ function App({ loadUser }) {
           <Login />
         </Route>
         <Route path="/contact" component={Contact} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>
