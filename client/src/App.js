@@ -13,6 +13,7 @@ import { loadUser } from "./redux/actions/auth";
 import PropTypes from "prop-types";
 
 import "react-toastify/dist/ReactToastify.min.css";
+import NotFound from "./components/NotFound/NotFound";
 
 function App({ loadUser }) {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App({ loadUser }) {
           <Login />
         </Route>
         <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
       </Switch>
     </Fragment>
   );
