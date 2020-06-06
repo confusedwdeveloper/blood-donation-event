@@ -41,5 +41,8 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  registeredDate: {
+    type: Date,
+  },
 });
 module.exports = User = mongoose.model("user", UserSchema);

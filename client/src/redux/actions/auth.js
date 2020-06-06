@@ -91,7 +91,7 @@ export const loginUser = (data) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (err) {
-    const { errors } = err.response.data;
+    const errors = err?.response?.data?.errors;
     if (errors) {
       const options = {
         position: "top-center",

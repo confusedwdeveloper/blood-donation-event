@@ -14,12 +14,27 @@ export const selectAuthLoading = createSelector(
 
 export const selectUser = createSelector([selectAuth], (auth) => auth.user);
 
-const selectFirstName = createSelector([selectUser], (user) => user?.firstName);
+export const selectFirstName = createSelector(
+  [selectUser],
+  (user) => user?.firstName
+);
 const selectLastName = createSelector([selectUser], (user) => user?.lastName);
-const selectEmail = createSelector([selectUser], (user) => user?.email);
+export const selectEmail = createSelector([selectUser], (user) => user?.email);
+
+export const selectFullName = createSelector(
+  [selectFirstName, selectLastName],
+  (f, l) => `${f} ${l}`
+);
+
+export const selectUserId = createSelector([selectUser], (user) => user?._id);
 
 export const selectContact = createStructuredSelector({
   firstName: selectFirstName,
   lastName: selectLastName,
   email: selectEmail,
 });
+
+export const selectIsRegistered = createSelector(
+  [selectUser],
+  (user) => user?.isRegistered
+);

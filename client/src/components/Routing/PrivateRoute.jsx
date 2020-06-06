@@ -32,7 +32,6 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
-  component: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   isLoggedIn: PropTypes.bool.isRequired,
 };
