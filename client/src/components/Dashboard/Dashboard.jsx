@@ -6,13 +6,15 @@ import { connect } from "react-redux";
 import {
   selectFirstName,
   selectIsRegistered,
+  selectRegisteredDate,
 } from "../../redux/selectors/authSelectors";
 import { createStructuredSelector } from "reselect";
 import ButtonContainer from "./ButtonContainer";
 import { DonorIcon } from "./ButtonContainer";
 import DonorForm from "./DonorForm";
+import Moment from "react-moment";
 
-const Dashboard = ({ firstName, isRegistered }) => {
+const Dashboard = ({ firstName, isRegistered, registeredDate }) => {
   return (
     <Lsc.BackgroundDiv>
       <sc.DashboardContainer>
@@ -26,7 +28,10 @@ const Dashboard = ({ firstName, isRegistered }) => {
             2020.
           </h3>
           {isRegistered ? (
-            <p>Your have registred for the event</p>
+            <sc.RegisteredPara>
+              Your have registered for this event{" "}
+              <Moment fromNow>{registeredDate}</Moment>
+            </sc.RegisteredPara>
           ) : (
             <>
               <p>
@@ -43,11 +48,13 @@ const Dashboard = ({ firstName, isRegistered }) => {
 
 Dashboard.propTypes = {
   firstName: PropTypes.string.isRequired,
+  isRegistered: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   firstName: selectFirstName,
   isRegistered: selectIsRegistered,
+  registeredDate: selectRegisteredDate,
 });
 
 export default connect(mapStateToProps)(Dashboard);

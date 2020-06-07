@@ -9,16 +9,15 @@ import {
   InputLabel,
 } from "../Login/Login.styles";
 import { createStructuredSelector } from "reselect";
-import {
-  selectFullName,
-  selectUserId,
-} from "../../redux/selectors/authSelectors";
+import { selectFullName } from "../../redux/selectors/authSelectors";
 import Dropdown from "./Dropdown";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { LOAD_USER } from "../../redux/actions/types";
 
-const DonorForm = ({ fullName, id }) => {
+const DonorForm = ({ fullName, dispatch }) => {
   const [data, setData] = useState({
     fullName,
-    id,
     bloodType: "",
     msg: "",
   });
@@ -34,9 +33,31 @@ const DonorForm = ({ fullName, id }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ id, bloodType, msg, fullName });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    };
+    const data = { bloodType, msg };
+    try {
+      const res = await axios.post("/api/event", data, config);
+      dispatch({
+        type: LOAD_USER,
+        payload: res.data,
+      });
+      toast.success("Registration successful");
+    } catch (err) {
+      const { errors } = err.response.data;
+      if (errors) {
+        const options = {
+          position: "top-center",
+        };
+        errors.forEach((error) => toast.error(error.msg, options));
+      }
+    }
   };
 
   return (
@@ -59,7 +80,6 @@ const DonorForm = ({ fullName, id }) => {
           name="msg"
           value={msg}
           onChange={handleChange}
-          required
           placeholder="Message"
         />
         <InputLabel>Message</InputLabel>
@@ -74,13 +94,10 @@ const DonorForm = ({ fullName, id }) => {
 DonorForm.propTypes = {
   fullName: PropTypes.string,
   email: PropTypes.string,
-  id: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   fullName: selectFullName,
-
-  id: selectUserId,
 });
 
 export default connect(mapStateToProps)(DonorForm);

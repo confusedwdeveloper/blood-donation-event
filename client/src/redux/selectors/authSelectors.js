@@ -38,3 +38,8 @@ export const selectIsRegistered = createSelector(
   [selectUser],
   (user) => user?.isRegistered
 );
+
+export const selectRegisteredDate = createSelector(
+  [selectUser],
+  (user) => user?.registeredDate
+);

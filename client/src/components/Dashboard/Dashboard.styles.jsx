@@ -69,6 +69,11 @@ export const Select = styled.select`
     text-align: center;
   }
 `;
+// registered success para
+export const RegisteredPara = styled.p`
+  font-size: 1.8rem;
+  font-style: italic;
+`;
 
 export const DropdownLabel = styled.label`
   display: block;
