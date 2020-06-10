@@ -9,6 +9,9 @@ const InfoButton = styled(RegisterButton)`
   padding-right: 1rem;
   padding-left: 1rem;
   cursor: pointer;
+  @media (max-width: 400px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const DonorIcon = styled(UserIcon)`

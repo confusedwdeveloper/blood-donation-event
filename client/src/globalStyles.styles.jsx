@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
     padding: 0;
+    overflow-x: hidden;
   }
   a {
     text-decoration: none;

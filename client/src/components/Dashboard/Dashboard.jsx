@@ -13,6 +13,7 @@ import ButtonContainer from "./ButtonContainer";
 import { DonorIcon } from "./ButtonContainer";
 import DonorForm from "./DonorForm";
 import Moment from "react-moment";
+import ProfileInfo from "./ProfileInfo";
 
 const Dashboard = ({ firstName, isRegistered, registeredDate }) => {
   return (
@@ -21,6 +22,7 @@ const Dashboard = ({ firstName, isRegistered, registeredDate }) => {
         <div>
           <sc.TextHeader>Welcome {firstName}</sc.TextHeader>
           <ButtonContainer />
+          <ProfileInfo />
         </div>
         <div>
           <h3>
