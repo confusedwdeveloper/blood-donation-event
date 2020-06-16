@@ -45,7 +45,7 @@ export const MenuIcon = styled(Menu)`
   display: none;
   color: #fffffe;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     display: inline-block;
     cursor: pointer;
     position: relative;
@@ -70,7 +70,7 @@ export const LinkContainer = styled.ul`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     z-index: 1;
     position: fixed;
     background: #232946;
