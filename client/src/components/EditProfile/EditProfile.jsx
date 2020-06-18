@@ -81,6 +81,8 @@ const EditProfile = ({ loadUser, loading, user }) => {
                   value={age}
                   onChange={handleChange}
                   placeholder="Age"
+                  min="10"
+                  max="100"
                 />
                 <Lsc.InputLabel>Age</Lsc.InputLabel>
               </Lsc.FormInputContainer>
