@@ -1,9 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as sc from "./EditProfile.styles";
 import * as Lsc from "../Login/Login.styles";
-import * as Rsc from "../Register/Register.styles";
 import Spinner from "../layout/Spinner/Spinner";
 import { loadUser } from "../../redux/actions/auth";
 import { createStructuredSelector } from "reselect";
@@ -18,7 +16,7 @@ const EditProfile = ({ loadUser, loading, user }) => {
   useEffect(() => {
     // loading user when user visits this page
     loadUser();
-  });
+  }, [loadUser]);
   const [data, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,6 +24,18 @@ const EditProfile = ({ loadUser, loading, user }) => {
     gender: "",
     location: "",
   });
+  useEffect(() => {
+    if (user) {
+      setFormData((d) => ({
+        ...d,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        age: user?.age || "",
+        gender: user?.gender || "",
+        location: user?.location || "",
+      }));
+    }
+  }, [user]);
 
   const { firstName, lastName, age, gender, location } = data;
 
@@ -81,8 +91,6 @@ const EditProfile = ({ loadUser, loading, user }) => {
                   value={age}
                   onChange={handleChange}
                   placeholder="Age"
-                  min="10"
-                  max="100"
                 />
                 <Lsc.InputLabel>Age</Lsc.InputLabel>
               </Lsc.FormInputContainer>

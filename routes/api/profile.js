@@ -66,7 +66,7 @@ router.post(
       return res.json(user);
     } catch (err) {
       console.log(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({ errors: [{ msg: "Server error" }] });
     }
   }
 );

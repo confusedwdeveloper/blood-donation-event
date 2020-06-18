@@ -5,7 +5,9 @@ module.exports = function verifyToken(req, res, next) {
   // get token
   const token = req.get("x-auth-token");
   if (!token) {
-    return res.status(400).json({ msg: "No token, access denied" });
+    return res
+      .status(400)
+      .json({ errors: [{ msg: "No token, access denied" }] });
   }
 
   try {
@@ -16,6 +18,6 @@ module.exports = function verifyToken(req, res, next) {
     next();
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({ msg: "Token is not valid" });
+    res.status(401).json({ errors: [{ msg: "Token is not valid" }] });
   }
 };

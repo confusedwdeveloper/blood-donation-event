@@ -49,8 +49,8 @@ const Dashboard = ({ firstName, isRegistered, registeredDate }) => {
 };
 
 Dashboard.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  isRegistered: PropTypes.bool.isRequired,
+  firstName: PropTypes.string,
+  isRegistered: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
