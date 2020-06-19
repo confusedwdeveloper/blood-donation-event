@@ -10,6 +10,14 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// dispatch user
+export const dispatchUser = (user) => (dispatch) => {
+  dispatch({
+    type: LOAD_USER,
+    payload: user,
+  });
+};
+
 //actions to load user
 export const loadUser = () => async (dispatch) => {
   // get token

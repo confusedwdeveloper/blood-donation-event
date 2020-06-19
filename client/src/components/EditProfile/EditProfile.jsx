@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Lsc from "../Login/Login.styles";
 import Spinner from "../layout/Spinner/Spinner";
-import { loadUser } from "../../redux/actions/auth";
+import { loadUser, dispatchUser } from "../../redux/actions/auth";
 import { createStructuredSelector } from "reselect";
 import { Edit } from "@styled-icons/boxicons-solid/Edit";
 import {
@@ -11,8 +11,10 @@ import {
   selectUser,
 } from "../../redux/selectors/authSelectors";
 import Dropdown from "./Dropdown";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const EditProfile = ({ loadUser, loading, user }) => {
+const EditProfile = ({ loadUser, loading, user, history, dispatchUser }) => {
   useEffect(() => {
     // loading user when user visits this page
     loadUser();
@@ -47,9 +49,30 @@ const EditProfile = ({ loadUser, loading, user }) => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    };
+
+    try {
+      const res = await axios.post("/api/profile/edit", data, config);
+      dispatchUser(res.data);
+      toast.success("Profile Updated");
+      history.push("/dashboard");
+    } catch (err) {
+      const { errors } = err?.response?.data;
+      if (errors) {
+        const options = {
+          position: "top-center",
+        };
+        errors.forEach((error) => toast.error(error.msg, options));
+      }
+    }
   };
 
   return (
@@ -120,6 +143,7 @@ EditProfile.propTypes = {
   loadUser: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object,
+  dispatchUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -127,4 +151,6 @@ const mapStateToProps = createStructuredSelector({
   user: selectUser,
 });
 
-export default connect(mapStateToProps, { loadUser })(EditProfile);
+export default connect(mapStateToProps, { loadUser, dispatchUser })(
+  EditProfile
+);
