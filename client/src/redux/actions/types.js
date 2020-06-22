@@ -6,3 +6,6 @@ export const CLEAR_AUTH_LOADING = "CLEAR_AUTH_LOADING";
 export const LOGOUT = "LOGOUT";
 export const LOGIN_SUCCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOAD_DONORS = "LOAD_DONORS";
+export const DONOR_LOAD_FAIL = "DONOR_LOAD_FAIL";
+export const CLEAR_DONORS = "CLEAR_DONORS";

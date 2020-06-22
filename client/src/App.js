@@ -17,6 +17,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 import "react-toastify/dist/ReactToastify.min.css";
 import EditProfile from "./components/EditProfile/EditProfile";
+import Donors from "./components/Donors/Donors";
 
 function App({ loadUser }) {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App({ loadUser }) {
         <Route path="/contact" component={Contact} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/edit-profile" component={EditProfile} />
+        <PrivateRoute path="/donors" component={Donors} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>

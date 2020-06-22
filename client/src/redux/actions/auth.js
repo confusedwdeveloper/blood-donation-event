@@ -37,12 +37,6 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    // alert
-    const options = {
-      position: "top-center",
-    };
-    toast.error(err.response.data, options);
-
     dispatch({ type: AUTH_ERROR });
   }
 };

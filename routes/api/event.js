@@ -20,7 +20,9 @@ router.post(
         .notEmpty()
         .withMessage("Please include your message")
         .isLength({ min: 8 })
-        .withMessage("Your message is too short"),
+        .withMessage("Your message is too short")
+        .isLength({ max: 100 })
+        .withMessage("Your message is too long"),
     ],
   ],
   async (req, res) => {
@@ -72,5 +74,24 @@ router.post(
     }
   }
 );
+
+// @route   GET /api/event
+// @desc    Get all signed up donors
+// @access  Private
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const donors = await Donor.find().populate("user", [
+      "firstName",
+      "lastName",
+      "email",
+      "location",
+      "age",
+    ]);
+    res.json(donors);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ errors: [{ msg: "Server error" }] });
+  }
+});
 
 module.exports = router;
